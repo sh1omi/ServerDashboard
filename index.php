@@ -1,52 +1,38 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-/* --------------------------------------------------------------
- * Load system
- * -------------------------------------------------------------- */
 require('system.php');
 $system = new System;
-
-
-/* --------------------------------------------------------------
- * Get current directory
- * -------------------------------------------------------------- */
-$base = rtrim(str_replace($_SERVER['DOCUMENT_ROOT'], '', dirname(__FILE__)), '/');
 ?>
-
-<!doctype html>
 <html>
 <head>
-    <title><?php echo $system->os->hostname; ?></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="<?php echo $base . '/static/dark.css'; ?>">
+<title><?php echo $system->os->hostname;?></title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/bootstrap-grid.css">
+<link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
-
-<div id="container">
-
-<h1>
-    <?php echo $system->os->hostname; ?>
-    <small id="uptime">online for <?php echo $system->uptime->days; ?> days, <?php echo $system->uptime->hours; ?> hours, <?php echo $system->uptime->minutes; ?> minutes </small>
-</h1>
-
-<?php
-
-/* --------------------------------------------------------------
- * Show widgets
- * -------------------------------------------------------------- */
-$directory = dirname(__FILE__) . '/widgets';
-$widgets = scandir($directory,  SCANDIR_SORT_ASCENDING);
-
-foreach ($widgets as $widget) {
-    if ($widget != '.' && $widget != '..') {
-        include($directory . '/' . $widget);
-    }
-}
-
-?>
-
+<div class="container">
+    <div class="row">
+        <h1>
+        <?php echo $system->os->hostname;?>
+        <div class="uptime">online for <?php echo $system->uptime->days; ?> days, <?php echo $system->uptime->hours; ?> hours, <?php echo $system->uptime->minutes; ?> minutes </div>
+        </h1>
+    </div>
+    <div class="row">
+        <?php
+            include("widgets/cpu.php");
+            include("widgets/memory.php");
+            include("widgets/swap.php");
+            include("widgets/disks.php");
+            include("widgets/network.php");
+        ?>
+    </div>
 </div>
-
 </body>
 </html>

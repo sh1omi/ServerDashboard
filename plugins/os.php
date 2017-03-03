@@ -15,12 +15,8 @@ class OS {
         /* --------------------------------------------------------------
          * Get real remote ip
          * -------------------------------------------------------------- */
-        $ip = @file_get_contents('http://checkip.dyndns.org');
-
-        if ($ip) {
-            preg_match('/Current IP Address: ([0-9a-f:\.]+)/', $ip, $matches);
-            $this->ip = $matches[1];
-        }
+        $ip = @file_get_contents('http://bot.whatismyipaddress.com/');
+        if ($ip) $this->ip = $ip;
     }
 
 }
