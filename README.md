@@ -5,11 +5,10 @@ Clone the repository to your webserver:
 
     git clone https://github.com/sh1omi/ServerDashboard.git
 
-Example
+Screenshot
 -------
 
-![Dashboard example](http://jenssegers.be/uploads/images/dashboard.png)
-Note: This screenshot is not updated
+![Dashboard example](http://i.imgur.com/kDdPipJ.png)
 
 Features
 --------
